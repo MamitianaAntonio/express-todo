@@ -20,3 +20,19 @@ router.post("/", (req, res) => {
   todos.push(newTodo);
   res.status(200).json(newTodo);
 });
+
+// update a task by id
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, completed } = req.body;
+
+  const todo = todos.find((todo) => todo.id == id);
+  if (!todo) {
+    return res.status(404).json({ message: "Task not found" });
+  }
+
+  if (title !== undefined) todo.title = title;
+  if (completed !== undefined) todo.completed = completed;
+
+  res.json(todo);
+});

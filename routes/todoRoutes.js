@@ -36,3 +36,12 @@ router.put("/:id", (req, res) => {
 
   res.json(todo);
 });
+
+// delete a task
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  todos = todos.filter((todo) => todo.id !== id);
+  res.json({ message: "Task deleted successfully" });
+});
+
+module.exports = router;
